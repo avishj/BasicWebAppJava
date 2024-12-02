@@ -18,7 +18,27 @@ public class QueryProcessor {
         return result;
     }
 
+    private static boolean isPerfectSquare(int num) {
+        int sqrt = (int) Math.sqrt(num);
+        return sqrt * sqrt == num;
+    }
+    
+    private static boolean isPerfectCube(int num) {
+        int cbrt = (int) Math.cbrt(num);
+        return cbrt * cbrt * cbrt == num;
+    }
+
     public String process(String query) {
+
+        if (query.toLowerCase().contains("cube") && query.toLowerCase().contains("square")) {
+            int[] numbers = extractNumbers(query);
+            for (int num : numbers) {
+                if (isPerfectSquare(num) && isPerfectCube(num)) {
+                    return num + "";
+                }
+            }
+            return -1 + "";
+        }
 
         if (query.toLowerCase().contains("plus")) {
             int[] numbers = extractNumbers(query);
