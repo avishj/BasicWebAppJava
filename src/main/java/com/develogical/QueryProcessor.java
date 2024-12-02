@@ -30,6 +30,11 @@ public class QueryProcessor {
 
     public String process(String query) {
 
+        if (query.toLowerCase().contains("plus")) {
+            int[] numbers = extractNumbers(query);
+            return (numbers[0] - numbers[1]) + "";
+        }
+
         if (query.toLowerCase().contains("multiplied")) {
             int[] numbers = extractNumbers(query);
             int mult = 1;
