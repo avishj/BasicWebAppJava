@@ -1,6 +1,7 @@
 package com.develogical;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.*;
 
 public class QueryProcessor {
 
@@ -28,7 +29,24 @@ public class QueryProcessor {
         return cbrt * cbrt * cbrt == num;
     }
 
+    private static boolean isPrime(int number) {
+        if (number <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) return false;
+        }
+        return true;
+    }
+
     public String process(String query) {
+
+        if (query.toLowerCase().contains("primes")) {
+            int[] numbers = extractNumbers(query);
+            return Arrays.stream(numbers)
+                 .filter(n -> isPrime(n))
+                 .mapToObj(String::valueOf)
+                 .collect(Collectors.joining(", "));
+
+        }
 
         if (query.toLowerCase().contains("minus")) {
             int[] numbers = extractNumbers(query);
