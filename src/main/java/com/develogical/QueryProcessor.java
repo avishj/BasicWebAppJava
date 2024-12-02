@@ -30,8 +30,10 @@ public class QueryProcessor {
 
     public String process(String query) {
 
-        if (query.toLowerCase().contains("plus")) {
+        if (query.toLowerCase().contains("minus")) {
             int[] numbers = extractNumbers(query);
+            System.out.println(query);
+            System.out.println((numbers[0] - numbers[1]) + "");
             return (numbers[0] - numbers[1]) + "";
         }
 
