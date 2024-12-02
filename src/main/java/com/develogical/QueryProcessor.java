@@ -1,14 +1,33 @@
 package com.develogical;
 
+import java.util.Arrays;
+
 public class QueryProcessor {
+
+    private static int[] extractNumbers(String text) {
+        String[] numbers = text.replaceAll("[^0-9]+", " ").trim().split(" ");
+        
+        if (numbers[0].isEmpty()) {
+            return new int[0];
+        }
+        
+        int[] result = new int[numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            result[i] = Integer.parseInt(numbers[i]);
+        }
+        return result;
+    }
 
     public String process(String query) {
 
         if (query.toLowerCase().contains("plus")) {
-            String[] numbers = input.split(" plus ");
-            int num1 = Integer.parseInt(numbers[0].trim());
-            int num2 = Integer.parseInt(numbers[1].trim());
-            return num1 + num2 + "";
+            int[] numbers = extractNumbers(query);
+            return Arrays.stream(numbers).sum() + "";
+        }
+
+        if (query.toLowerCase().contains("largest")) {
+            int[] numbers = extractNumbers(query);
+            return Arrays.stream(numbers).max().getAsInt() + "";
         }
 
         if (query.toLowerCase().contains("shakespeare")) {
