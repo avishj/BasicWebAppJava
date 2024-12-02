@@ -30,6 +30,15 @@ public class QueryProcessor {
 
     public String process(String query) {
 
+        if (query.toLowerCase().contains("multiplied")) {
+            int[] numbers = extractNumbers(query);
+            int mult = 1;
+            for (int num: numbers) {
+                mult *= num;
+            }
+            return mult + "";
+        }
+
         if (query.toLowerCase().contains("cube") && query.toLowerCase().contains("square")) {
             int[] numbers = extractNumbers(query);
             for (int num : numbers) {
